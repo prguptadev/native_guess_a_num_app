@@ -7,7 +7,9 @@ import Resultfs from "../Result-fix/Resultfs";
 
 const LetStart = (props) => {
   const [startMode, setStartMode] = useState(false);
+  const [wins, setwins] = useState(false);
   const [prevalue, setprevalue] = useState();
+  const [checkcount, setcheckcount] = useState(0);
   const revert = (rever) => {
     return setStartMode(rever);
   };
@@ -19,24 +21,45 @@ const LetStart = (props) => {
   console.log(
     "predicted one from App - " + prevalue + "-platform-- " + Platform.OS
   );
+
+  const GameOverHandler = (winn, count) => {
+    setwins(true);
+    console.log("====================" + count);
+    setcheckcount(count);
+  };
+
+  let screen = (
+    <GameOn
+      visiblemode={startMode}
+      predicated={prevalue}
+      onGameOver={GameOverHandler}
+    />
+  );
+  if (wins) {
+    screen = <Resultfs finalcount={checkcount} />;
+  }
+
   return (
-    <View style={styles.constainerView}>
-      <Button
-        style={styles.start}
-        icon="star-three-points"
-        mode="contained"
-        color="green"
-        labelStyle={{ fontSize: 25 }}
-        onPress={() => {
-          {
-            setStartMode(true);
-            predicate();
-          }
-        }}
-      >
-        <Text style={{ fontSize: 14 }}>Let's Begin</Text>
-      </Button>
-      {/* <TouchableHighlight
+    <View>
+      <View>{screen}</View>
+      <View style={styles.constainerView}>
+        <Button
+          style={styles.start}
+          icon="star-three-points"
+          mode="outlined"
+          color="green"
+          labelStyle={{ fontSize: 25 }}
+          onPress={() => {
+            {
+              setStartMode(true);
+              predicate();
+              setwins(false);
+            }
+          }}
+        >
+          <Text style={{ fontSize: 14 }}>Let's Begin</Text>
+        </Button>
+        {/* <TouchableHighlight
         activeOpacity={0.5}
         underlayColor="#f90"
         onPress={() => setStartMode(true)}
@@ -46,12 +69,14 @@ const LetStart = (props) => {
           Let's Begin
         </Text>
       </TouchableHighlight> */}
-      <GameOn
+
+        {/* <GameOn
         visiblemode={startMode}
         predicated={prevalue}
         //revertohome={revert}
       ></GameOn>
-      {/* <Resultfs></Resultfs> */}
+       */}
+      </View>
     </View>
   );
 };
@@ -59,7 +84,7 @@ export default LetStart;
 
 const styles = StyleSheet.create({
   constainerView: {
-    marginTop: 400,
+    marginTop: 40,
     alignItems: "center",
     justifyContent: "center",
   },

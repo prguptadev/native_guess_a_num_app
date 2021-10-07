@@ -32,9 +32,9 @@ const GameOn = (propso) => {
   const inputchecker = (value) => {
     setinput(value);
   };
-  const trytryreset = () => {
-    setcount(0);
-  };
+  // const trytryreset = () => {
+  //   setcount(0);
+  // };
 
   const onChangeText = (text) => {
     // if (/^\d+$/.test(text) || text === "") {
@@ -50,8 +50,8 @@ const GameOn = (propso) => {
     "inout--setcount-- " + input + "--" + count + "-reset -- " + resetcount
   );
   let message;
-  if (msgno === 3) message = "Please enter lower number : " + input;
-  else if (msgno === 2) message = "Please enter higher number : " + input;
+  if (msgno === 3) message = "Please enter lower number then " + input;
+  else if (msgno === 2) message = "Please enter higher number then " + input;
   else if (msgno == 1) message = "Please enter number between 1 to 9";
   else message = "";
 
@@ -76,7 +76,8 @@ const GameOn = (propso) => {
     } else {
       //console.log("I reaced predicated --" + propso.predicated);
       setmsgno(0);
-      return setresultmode(true);
+      return propso.onGameOver(true, count + 1);
+      //setresultmode(true);
     }
     Keyboard.dismiss();
   };
@@ -99,7 +100,7 @@ const GameOn = (propso) => {
                   color: "yellow",
                 }}
               >
-                Start a New Game!
+                Play The Game!
               </Text>
             </View>
             <View>
@@ -112,10 +113,11 @@ const GameOn = (propso) => {
                 > */}
                   <Input
                     mode="flat"
-                    underlineColor="red"
+                    //underlineColor="red"
                     style={styles.updateinput}
-                    placeholder="Please enter number between 1 to 9"
+                    underlineColorAndroid={"rgba(0,0,0,0)"}
                     label="Enter random number"
+                    placeholder="Please enter number between 1 to 9"
                     value={input}
                     onChangeText={onChangeText}
                     //onPress={() => console.log("this is entered" + input)}
@@ -140,7 +142,7 @@ const GameOn = (propso) => {
                       onPress={() => {
                         {
                           inputcheckerreset();
-                          trytryreset();
+                          // trytryreset();
                           updateresetcount();
                         }
                       }}
@@ -169,12 +171,12 @@ const GameOn = (propso) => {
             </View>
           </View>
         </TouchableWithoutFeedback>
-        <Resultfs
+        {/* <Resultfs
           resultvisible={resulrmode}
           revertMode={() => {
             setresultmode(false);
           }}
-        ></Resultfs>
+        ></Resultfs> */}
       </Modal>
     </View>
   );
