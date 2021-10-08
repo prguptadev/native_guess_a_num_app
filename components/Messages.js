@@ -6,9 +6,10 @@ const Messages = (props) => {
     <View style={styless.showmessage}>
       <Text
         style={{
-          fontSize: 15,
+          fontSize: 18,
           fontWeight: "500",
           fontStyle: "italic",
+          color: "white",
           width: 310,
         }}
       >
@@ -22,7 +23,6 @@ const styless = StyleSheet.create({
   showmessage: {
     marginTop: -70,
     justifyContent: "center",
-    // borderWidth: 1,
     padding: 5,
     width: 300,
   },

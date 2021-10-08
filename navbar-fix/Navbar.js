@@ -4,7 +4,7 @@ import { StyleSheet, View, Text } from "react-native";
 export default function Navbar(props) {
   return (
     <View>
-      <Text style={stylish.header}>{props.title}</Text>
+      <Text style={{ ...stylish.header, ...props.style }}>{props.title}</Text>
     </View>
   );
 }
@@ -19,7 +19,7 @@ const stylish = StyleSheet.create({
     justifyContent: "space-around",
     paddingBottom: 15,
     paddingTop: 70,
-    fontWeight: "900",
+    fontWeight: "700",
     fontStyle: "italic",
     textDecorationStyle: "dotted",
     writingDirection: "rtl",
