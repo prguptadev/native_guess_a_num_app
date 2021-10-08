@@ -4,12 +4,18 @@ import GameOn from "../GameOneWithModal/GameOn";
 import { Button } from "react-native-paper";
 import { Platform } from "react-native";
 import Resultfs from "../Result-fix/Resultfs";
+import Mycolors from "../constants/Mycolors";
+import { MaterialCommunityIcons, Fontisto, Ionicons } from "@expo/vector-icons";
 
 const LetStart = (props) => {
   const [startMode, setStartMode] = useState(false);
   const [wins, setwins] = useState(false);
   const [prevalue, setprevalue] = useState();
   const [checkcount, setcheckcount] = useState(0);
+  const [winmsg, setwinmsg] = useState("Congratulation");
+  const [desc, setdesc] = useState("You Won!!");
+  const [emojisize, setemojisize] = useState(850);
+
   const revert = (rever) => {
     return setStartMode(rever);
   };
@@ -22,9 +28,20 @@ const LetStart = (props) => {
     "predicted one from App - " + prevalue + "-platform-- " + Platform.OS
   );
 
-  const GameOverHandler = (winn, count) => {
+  const GameOverHandler = (count) => {
     setwins(true);
+    setemojisize(420);
     console.log("====================" + count);
+    if (count === 10) {
+      setwinmsg("     ...Oops...");
+      setdesc("You Lost!");
+    } else if (count === 0) {
+      setwinmsg("         Quit!!");
+      setdesc("    Looser");
+    } else {
+      setwinmsg("Congratulation");
+      setdesc("You Won!!");
+    }
     setcheckcount(count);
   };
 
@@ -36,7 +53,7 @@ const LetStart = (props) => {
     />
   );
   if (wins) {
-    screen = <Resultfs finalcount={checkcount} />;
+    screen = <Resultfs finalcount={checkcount} msg={winmsg} msgdes={desc} />;
   }
 
   return (
@@ -57,8 +74,11 @@ const LetStart = (props) => {
             }
           }}
         >
-          <Text style={{ fontSize: 14 }}>Let's Begin</Text>
+          <Text style={{ fontSize: 14 }}>Let's Begin </Text>
         </Button>
+        <Text>
+          <Fontisto name="smiley" size={emojisize} color="black" />
+        </Text>
         {/* <TouchableHighlight
         activeOpacity={0.5}
         underlayColor="#f90"
@@ -95,8 +115,9 @@ const styles = StyleSheet.create({
   },
   start: {
     borderRadius: 10,
+    marginBottom: 10,
     alignItems: "center",
-    backgroundColor: "#c7ded9",
+    backgroundColor: Mycolors.secondayScreen,
     borderColor: "black",
     borderWidth: 1,
     borderRadius: 20,

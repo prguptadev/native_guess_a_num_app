@@ -11,12 +11,12 @@ import {
 import Navbar from "./navbar-fix/Navbar";
 import LetStart from "./LetsStart/LetStart";
 import Resultfs from "./Result-fix/Resultfs";
-import { AppLoading } from "expo";
+import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
-//import colors from "./constants/colors";
+import Mycolors from "./constants/Mycolors";
 
 const fetchfonts = () => {
-  Font.loadAsync({
+  return Font.loadAsync({
     "my-open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
     "my-open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
   });
@@ -30,13 +30,22 @@ export default function App() {
 
   const [win, setwin] = useState(false);
   const [dataload, setdataload] = useState(false);
-  lg;
+  if (!dataload) {
+    return (
+      <AppLoading
+        startAsync={fetchfonts}
+        onFinish={() => setdataload(true)}
+        onError={(err) => console.log(err)}
+      />
+    );
+  }
+
   let content = <LetStart />;
 
   return (
     <View style={styles.container}>
       <View>
-        <Navbar title="GUESS A NUMBER"></Navbar>
+        <Navbar style={styles.title} title="GUESS A NUMBER"></Navbar>
       </View>
       <View>{content}</View>
 
@@ -48,7 +57,11 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#363836",
+    backgroundColor: Mycolors.primaryScreen,
     flex: 1,
+  },
+  title: {
+    //fontSize: 20,
+    fontFamily: "my-open-sans-bold",
   },
 });

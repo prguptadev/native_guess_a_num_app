@@ -1,70 +1,94 @@
 import React, { useState } from "react";
-import { View, Modal, Text, Image, Dimensions } from "react-native";
+import { View, Modal, Text, Image, StyleSheet, Dimensions } from "react-native";
 import { Card, Button, TextInput } from "react-native-paper";
+import BodyText from "../components/BodyText";
+import Mycolors from "../constants/Mycolors";
 
 const { width, height } = Dimensions.get("window");
 
 const Resultfs = (props) => {
   return (
-    <View>
+    <View
+      style={{
+        margin: 20,
+        marginTop: 40,
+        backgroundColor: Mycolors.secondayScreen,
+        height: 400,
+        justifyContent: "flex-start",
+        borderRadius: 40,
+      }}
+    >
       {/* <Modal
         visible={props.resultvisible}
         animationType="slide"
         //onRequestClose={props.revertMode.bind(this, false)}
       > */}
-      <View>
+      <View style={{ marginTop: 1 }}>
         <View style={{ padding: 20, height: 300 }}>
-          <Image
-            style={{
-              marginTop: 30,
-              marginLeft: 78,
-              paddingLeft: 90,
-              justifyContent: "center",
-              alignItems: "center",
-              width: 220,
-              height: 100,
-              position: "relative",
-            }}
-            source={require("../assets/win.png")}
-          />
-          <Text
+          <BodyText style={{ color: "red", paddingLeft: 100, padding: 10 }}>
+            The Game is Over!
+          </BodyText>
+          <View style={styless.images}>
+            <Image
+              fadeDuration={3000}
+              style={{
+                // marginTop: 22,
+                // marginLeft: 18,
+                //paddingLeft: 90,
+                //justifyContent: "center",
+                //alignItems: "center",
+                // width: 130,
+                height: 200,
+                //borderRadius: 100,
+                // position: "relative",
+              }}
+              //source={require("../assets/win.png")}
+              source={{
+                uri: "https://static01.nyt.com/images/2021/01/20/sports/19ALTsummit-k2-2-print/19summit-k2-2-articleLarge.jpg?quality=75&auto=webp&disable=upscale",
+              }}
+              resizeMode="cover"
+            />
+          </View>
+          <BodyText
             style={{
               marginTop: 40,
+              justifyContent: "space-evenly",
               // backgroundColor: "white",
-              fontSize: 40,
+              fontSize: 35,
               color: "white",
-              alignContent: "center",
+              //alignContent: "center",
               fontStyle: "italic",
-              paddingLeft: 55,
+              paddingLeft: 40,
               //alignItems: "stretch",
             }}
           >
-            Congratulation
-          </Text>
-          <Text
+            {props.msg}
+          </BodyText>
+          <BodyText
             style={{
               // backgroundColor: "white",
-              fontSize: 40,
+              fontSize: 25,
               color: "white",
-              justifyContent: "space-evenly",
+              justifyContent: "center",
               fontStyle: "italic",
-              paddingLeft: 90,
-              //alignItems: "stretch",
+              paddingLeft: 100,
+              alignItems: "center",
             }}
           >
-            You Won!!
-          </Text>
-          <Text
+            {props.msgdes}
+          </BodyText>
+          <BodyText
             style={{
               padding: 10,
               fontSize: 15,
               color: "white",
               justifyContent: "center",
-              paddingLeft: 90,
+              paddingLeft: 65,
             }}
           >
-            You got right in {props.finalcount} attempt
-          </Text>
+            Number of attempts:{"  "}
+            <Text style={{ color: "red" }}>{props.finalcount}</Text>
+          </BodyText>
         </View>
         <View
           style={
@@ -97,5 +121,17 @@ const Resultfs = (props) => {
     </View>
   );
 };
+
+const styless = StyleSheet.create({
+  images: {
+    marginLeft: "27%",
+    borderRadius: 200,
+    borderWidth: 2,
+    borderColor: "black",
+    width: 150,
+    height: 150,
+    overflow: "hidden",
+  },
+});
 
 export default Resultfs;

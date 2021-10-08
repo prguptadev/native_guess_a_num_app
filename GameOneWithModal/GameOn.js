@@ -13,6 +13,10 @@ import Resultfs from "../Result-fix/Resultfs";
 import Cards from "../components/Cards";
 import Messages from "../components/Messages";
 import Input from "../components/Input";
+import Default_style from "../constants/Default_style";
+import Mycolors from "../constants/Mycolors";
+import MainButton from "../components/MainButton";
+import { MaterialIcons, Fontisto, Ionicons } from "@expo/vector-icons";
 
 const GameOn = (propso) => {
   const [input, setinput] = useState();
@@ -27,6 +31,10 @@ const GameOn = (propso) => {
 
   const trytry = () => {
     setcount(count + 1);
+
+    if (count === 9) {
+      return propso.onGameOver(count + 1);
+    }
   };
 
   const inputchecker = (value) => {
@@ -44,14 +52,20 @@ const GameOn = (propso) => {
 
   const inputcheckerreset = () => {
     setinput("");
-    setmsgno(90);
+    setmsgno();
   };
   console.log(
     "inout--setcount-- " + input + "--" + count + "-reset -- " + resetcount
   );
+
+  const giveup = () => {
+    console.log("ha ja rha bc");
+    return propso.onGameOver(0);
+  };
+
   let message;
-  if (msgno === 3) message = "Please enter lower number then " + input;
-  else if (msgno === 2) message = "Please enter higher number then " + input;
+  if (msgno === 3) message = "Please enter lower number than " + input;
+  else if (msgno === 2) message = "Please enter higher number than " + input;
   else if (msgno == 1) message = "Please enter number between 1 to 9";
   else message = "";
 
@@ -76,7 +90,7 @@ const GameOn = (propso) => {
     } else {
       //console.log("I reaced predicated --" + propso.predicated);
       setmsgno(0);
-      return propso.onGameOver(true, count + 1);
+      return propso.onGameOver(count + 1);
       //setresultmode(true);
     }
     Keyboard.dismiss();
@@ -91,17 +105,7 @@ const GameOn = (propso) => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.centeredView}>
             <View>
-              <Text
-                style={{
-                  marginTop: -350,
-                  alignItems: "center",
-                  fontWeight: "700",
-                  fontSize: 20,
-                  color: "yellow",
-                }}
-              >
-                Play The Game!
-              </Text>
+              <Text style={Default_style.bodyText}>Play The Game!</Text>
             </View>
             <View>
               <Cards style={styles.addcard}>
@@ -153,7 +157,7 @@ const GameOn = (propso) => {
                       style={{ width: 115, borderRadius: 10 }}
                       icon="check-decagram"
                       mode="contained"
-                      color="#FF6900"
+                      color={Mycolors.checkbuttom}
                       labelStyle={{ fontSize: 25 }}
                       onPress={() => {
                         trytry();
@@ -166,8 +170,21 @@ const GameOn = (propso) => {
                 </View>
               </Cards>
             </View>
+
             <View>
               <Messages>{message}</Messages>
+            </View>
+            <View style={{ marginBottom: 50 }}>
+              <MainButton
+                onClick={() => {
+                  giveup();
+                }}
+              >
+                !Don't Give up!
+              </MainButton>
+            </View>
+            <View style={{ marginBottom: -300 }}>
+              <MaterialIcons name="emoji-nature" size={200} color="black" />
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -187,7 +204,7 @@ export default GameOn;
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    marginTop: 106,
+    marginTop: 109,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "grey",
