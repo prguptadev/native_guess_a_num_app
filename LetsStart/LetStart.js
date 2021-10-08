@@ -37,7 +37,7 @@ const LetStart = (props) => {
       setdesc("You Lost!");
     } else if (count === 0) {
       setwinmsg("         Quit!!");
-      setdesc("    Looser");
+      setdesc("     Looser");
     } else {
       setwinmsg("Congratulation");
       setdesc("You Won!!");
