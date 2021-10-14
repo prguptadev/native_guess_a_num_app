@@ -94,7 +94,7 @@ const GameOn = (propso) => {
       //console.log("I reaced predicated --" + propso.predicated);
       setmsgno(0);
       return propso.onGameOver(count + 1);
-      //setresultmode(true);
+      //setresultmode  (true);
     }
     Keyboard.dismiss();
   };
