@@ -11,11 +11,12 @@ const Resultfs = (props) => {
     <View
       style={{
         margin: 20,
-        marginTop: 40,
+        marginTop: 20,
         backgroundColor: Mycolors.secondayScreen,
-        height: 400,
+        height: 390,
         justifyContent: "flex-start",
         borderRadius: 40,
+        marginBottom: "-2%",
       }}
     >
       {/* <Modal

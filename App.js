@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
   StyleSheet,
@@ -24,9 +23,7 @@ const fetchfonts = () => {
 
 export default function App() {
   //  const predict = Math.floor(Math.random() * 9 + 1);
-  // console.log(
-  //   "predicted one from App - " + predict + "-platform-- " + Platform.OS
-  // );
+  console.log("predicted one from App --platform-- " + Platform.OS);
 
   const [win, setwin] = useState(false);
   const [dataload, setdataload] = useState(false);

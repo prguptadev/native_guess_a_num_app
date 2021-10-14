@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
+  Dimensions,
 } from "react-native";
 import { Button } from "react-native-paper";
 import Resultfs from "../Result-fix/Resultfs";
@@ -183,8 +184,13 @@ const GameOn = (propso) => {
                 !Don't Give up!
               </MainButton>
             </View>
-            <View style={{ marginBottom: -300 }}>
-              <MaterialIcons name="emoji-nature" size={200} color="black" />
+            <View
+              style={{
+                marginBottom:
+                  Dimensions.get("window").width > 413 ? -200 : -380,
+              }}
+            >
+              <MaterialIcons name="emoji-nature" size={120} color="black" />
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -204,7 +210,7 @@ export default GameOn;
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    marginTop: 109,
+    marginTop: Dimensions.get("window").width > 413 ? 100 : 45,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "grey",
@@ -217,7 +223,7 @@ const styles = StyleSheet.create({
     // textAlign: "center",
   },
   addcard: {
-    marginTop: -300,
+    marginTop: "-90%",
     paddingLeft: 20,
     paddingRight: 20,
     paddingBottom: 20,

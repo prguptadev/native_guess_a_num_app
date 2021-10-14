@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableHighlight, StyleSheet } from "react-native";
 import GameOn from "../GameOneWithModal/GameOn";
 import { Button } from "react-native-paper";
-import { Platform } from "react-native";
+import { Platform, Dimensions } from "react-native";
 import Resultfs from "../Result-fix/Resultfs";
 import Mycolors from "../constants/Mycolors";
 import { MaterialCommunityIcons, Fontisto, Ionicons } from "@expo/vector-icons";
@@ -14,7 +14,7 @@ const LetStart = (props) => {
   const [checkcount, setcheckcount] = useState(0);
   const [winmsg, setwinmsg] = useState("Congratulation");
   const [desc, setdesc] = useState("You Won!!");
-  const [emojisize, setemojisize] = useState(850);
+  const [emojisize, setemojisize] = useState(400);
 
   const revert = (rever) => {
     return setStartMode(rever);
@@ -30,7 +30,9 @@ const LetStart = (props) => {
 
   const GameOverHandler = (count) => {
     setwins(true);
-    setemojisize(420);
+    if (Dimensions.get("window").width > 413) setemojisize(250);
+    else setemojisize(100);
+
     console.log("====================" + count);
     if (count === 10) {
       setwinmsg("     ...Oops...");
@@ -76,9 +78,10 @@ const LetStart = (props) => {
         >
           <Text style={{ fontSize: 14 }}>Let's Begin </Text>
         </Button>
-        <Text>
-          <Fontisto name="smiley" size={emojisize} color="black" />
-        </Text>
+        <View style={{ justifyContent: "center" }}>
+          <Fontisto name="smiley" size={emojisize} color="grey" />
+        </View>
+
         {/* <TouchableHighlight
         activeOpacity={0.5}
         underlayColor="#f90"
@@ -104,7 +107,7 @@ export default LetStart;
 
 const styles = StyleSheet.create({
   constainerView: {
-    marginTop: 40,
+    marginTop: Dimensions.get("window").width > 413 ? "10%" : "10%",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -115,7 +118,7 @@ const styles = StyleSheet.create({
   },
   start: {
     borderRadius: 10,
-    marginBottom: 10,
+    marginBottom: 15,
     alignItems: "center",
     backgroundColor: Mycolors.secondayScreen,
     borderColor: "black",
