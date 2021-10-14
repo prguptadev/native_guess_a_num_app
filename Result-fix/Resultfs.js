@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, Modal, Text, Image, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Modal,
+  Text,
+  Image,
+  StyleSheet,
+  Dimensions,
+  Platform,
+} from "react-native";
 import { Card, Button, TextInput } from "react-native-paper";
 import BodyText from "../components/BodyText";
 import Mycolors from "../constants/Mycolors";
@@ -11,11 +19,12 @@ const Resultfs = (props) => {
     <View
       style={{
         margin: 20,
-        marginTop: 40,
+        marginTop: 20,
         backgroundColor: Mycolors.secondayScreen,
-        height: 400,
+        height: 390,
         justifyContent: "flex-start",
         borderRadius: 40,
+        marginBottom: "-2%",
       }}
     >
       {/* <Modal
@@ -25,7 +34,15 @@ const Resultfs = (props) => {
       > */}
       <View style={{ marginTop: 1 }}>
         <View style={{ padding: 20, height: 300 }}>
-          <BodyText style={{ color: "red", paddingLeft: 100, padding: 10 }}>
+          <BodyText
+            style={{
+              ...styless.bodytestbase,
+              ...Platform.select({
+                ios: styless.bodytestios,
+                android: styless.bodytestandroid,
+              }),
+            }}
+          >
             The Game is Over!
           </BodyText>
           <View style={styless.images}>
@@ -131,6 +148,21 @@ const styless = StyleSheet.create({
     width: 150,
     height: 150,
     overflow: "hidden",
+  },
+  bodytestbase: {
+    color: "red",
+    paddingLeft: 100,
+    padding: 10,
+  },
+  bodytestios: {
+    color: "yellow",
+    paddingLeft: 100,
+    padding: 10,
+  },
+  bodytestandroid: {
+    color: "pink",
+    paddingLeft: 100,
+    padding: 10,
   },
 });
 

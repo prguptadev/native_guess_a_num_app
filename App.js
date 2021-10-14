@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
   StyleSheet,
@@ -7,12 +6,14 @@ import {
   Modal,
   KeyboardAvoidingView,
   Platform,
+  SafeAreaView,
 } from "react-native";
 import Navbar from "./navbar-fix/Navbar";
 import LetStart from "./LetsStart/LetStart";
 import Resultfs from "./Result-fix/Resultfs";
 import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
+//import { ScreenOrientation } from "expo"; install expo screen oretenation to use aside of reactnative
 import Mycolors from "./constants/Mycolors";
 
 const fetchfonts = () => {
@@ -23,10 +24,9 @@ const fetchfonts = () => {
 };
 
 export default function App() {
+  // ScreenOrientation.loadAsync(ScreenOrientation.OrientationLock.PORTRAIT);
   //  const predict = Math.floor(Math.random() * 9 + 1);
-  // console.log(
-  //   "predicted one from App - " + predict + "-platform-- " + Platform.OS
-  // );
+  console.log("predicted one from App --platform-- " + Platform.OS);
 
   const [win, setwin] = useState(false);
   const [dataload, setdataload] = useState(false);
@@ -43,6 +43,7 @@ export default function App() {
   let content = <LetStart />;
 
   return (
+    // <SafeAreaView> giving wrong output need to check on page not modal update view with styale
     <View style={styles.container}>
       <View>
         <Navbar style={styles.title} title="GUESS A NUMBER"></Navbar>
