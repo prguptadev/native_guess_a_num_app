@@ -7,6 +7,9 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
+  Dimensions,
+  ScrollView,
+  KeyboardAvoidingView,
 } from "react-native";
 import { Button } from "react-native-paper";
 import Resultfs from "../Result-fix/Resultfs";
@@ -91,110 +94,124 @@ const GameOn = (propso) => {
       //console.log("I reaced predicated --" + propso.predicated);
       setmsgno(0);
       return propso.onGameOver(count + 1);
-      //setresultmode(true);
+      //setresultmode  (true);
     }
     Keyboard.dismiss();
   };
   return (
     <View>
-      <Modal
-        visible={propso.visiblemode}
-        animationType="slide"
-        transparent={true}
-      >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.centeredView}>
-            <View>
-              <Text style={Default_style.bodyText}>Play The Game!</Text>
-            </View>
-            <View>
-              <Cards style={styles.addcard}>
-                {/* can you predefined card but I have design my own card component */}
-                <View style={{ marginTop: -10, padding: 10 }}>
-                  {/* <KeyboardAvoidingView
+      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={30}>
+        <Modal
+          visible={propso.visiblemode}
+          animationType="slide"
+          transparent={true}
+          supportedOrientations={[
+            "portrait",
+            //"portrait-upside-down",
+            "landscape",
+            // "landscape-left",
+            //  "landscape-right",
+          ]}
+        >
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.centeredView}>
+              <View>
+                <Text style={Default_style.bodyText}>Play The Game!</Text>
+              </View>
+              <View>
+                <Cards style={styles.addcard}>
+                  {/* can you predefined card but I have design my own card component */}
+                  <View style={{ marginTop: -10, padding: 10 }}>
+                    {/* <KeyboardAvoidingView
                   behavior="padding"
                   style={styles.containers}
                 > */}
-                  <Input
-                    mode="flat"
-                    //underlineColor="red"
-                    style={styles.updateinput}
-                    underlineColorAndroid={"rgba(0,0,0,0)"}
-                    label="Enter random number"
-                    placeholder="Please enter number between 1 to 9"
-                    value={input}
-                    onChangeText={onChangeText}
-                    //onPress={() => console.log("this is entered" + input)}
-                  />
-                  {/* </KeyboardAvoidingView> */}
+                    <Input
+                      mode="flat"
+                      //underlineColor="red"
+                      style={styles.updateinput}
+                      underlineColorAndroid={"rgba(0,0,0,0)"}
+                      label="Enter random number"
+                      placeholder="Please enter number between 1 to 9"
+                      value={input}
+                      onChangeText={onChangeText}
+                      //onPress={() => console.log("this is entered" + input)}
+                    />
+                    {/* </KeyboardAvoidingView> */}
 
-                  <View
-                    style={{
-                      marginTop: 50,
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Button
-                      style={{ width: 115, borderRadius: 10 }}
-                      icon="repeat"
-                      mode="contained"
-                      color="red" //{colors.resetbuttoncolor}
-                      labelStyle={{ fontSize: 25 }}
-                      children
-                      onPress={() => {
-                        {
-                          inputcheckerreset();
-                          // trytryreset();
-                          updateresetcount();
-                        }
+                    <View
+                      style={{
+                        marginTop: 50,
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
                       }}
                     >
-                      <Text style={{ fontSize: 14 }}>Reset</Text>
-                    </Button>
-                    <Button
-                      style={{ width: 115, borderRadius: 10 }}
-                      icon="check-decagram"
-                      mode="contained"
-                      color={Mycolors.checkbuttom}
-                      labelStyle={{ fontSize: 25 }}
-                      onPress={() => {
-                        trytry();
-                        checkpreicate(input);
-                      }} // propso.matchthisinput.bind(this, input)
-                    >
-                      <Text style={{ fontSize: 14 }}>Check</Text>
-                    </Button>
+                      <Button
+                        style={{ width: 115, borderRadius: 10 }}
+                        icon="repeat"
+                        mode="contained"
+                        color="red" //{colors.resetbuttoncolor}
+                        labelStyle={{ fontSize: 25 }}
+                        children
+                        onPress={() => {
+                          {
+                            inputcheckerreset();
+                            // trytryreset();
+                            updateresetcount();
+                          }
+                        }}
+                      >
+                        <Text style={{ fontSize: 14 }}>Reset</Text>
+                      </Button>
+                      <Button
+                        style={{ width: 115, borderRadius: 10 }}
+                        icon="check-decagram"
+                        mode="contained"
+                        color={Mycolors.checkbuttom}
+                        labelStyle={{ fontSize: 25 }}
+                        onPress={() => {
+                          trytry();
+                          checkpreicate(input);
+                        }} // propso.matchthisinput.bind(this, input)
+                      >
+                        <Text style={{ fontSize: 14 }}>Check</Text>
+                      </Button>
+                    </View>
                   </View>
-                </View>
-              </Cards>
-            </View>
+                </Cards>
+              </View>
 
-            <View>
-              <Messages>{message}</Messages>
-            </View>
-            <View style={{ marginBottom: 50 }}>
-              <MainButton
-                onClick={() => {
-                  giveup();
+              <View>
+                <Messages>{message}</Messages>
+              </View>
+              <View style={{ marginBottom: 50 }}>
+                <MainButton
+                  onClick={() => {
+                    giveup();
+                  }}
+                >
+                  !Don't Give up!
+                </MainButton>
+              </View>
+              <View
+                style={{
+                  marginBottom:
+                    Dimensions.get("window").width > 413 ? -200 : -380,
                 }}
               >
-                !Don't Give up!
-              </MainButton>
+                <MaterialIcons name="emoji-nature" size={120} color="black" />
+              </View>
             </View>
-            <View style={{ marginBottom: -300 }}>
-              <MaterialIcons name="emoji-nature" size={200} color="black" />
-            </View>
-          </View>
-        </TouchableWithoutFeedback>
-        {/* <Resultfs
+          </TouchableWithoutFeedback>
+          {/* <Resultfs
           resultvisible={resulrmode}
           revertMode={() => {
             setresultmode(false);
           }}
         ></Resultfs> */}
-      </Modal>
+        </Modal>
+      </KeyboardAvoidingView>
     </View>
   );
 };
@@ -204,7 +221,7 @@ export default GameOn;
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    marginTop: 109,
+    marginTop: Dimensions.get("window").width > 413 ? 100 : 45, // works only once in app cycle
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "grey",
@@ -217,7 +234,7 @@ const styles = StyleSheet.create({
     // textAlign: "center",
   },
   addcard: {
-    marginTop: -300,
+    marginTop: "-100%",
     paddingLeft: 20,
     paddingRight: 20,
     paddingBottom: 20,
