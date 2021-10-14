@@ -1,5 +1,12 @@
-import React, { useState } from "react";
-import { View, Text, TouchableHighlight, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  TouchableHighlight,
+  ScrollView,
+  StyleSheet,
+  SafeAreaView,
+} from "react-native";
 import GameOn from "../GameOneWithModal/GameOn";
 import { Button } from "react-native-paper";
 import { Platform, Dimensions } from "react-native";
@@ -15,7 +22,25 @@ const LetStart = (props) => {
   const [winmsg, setwinmsg] = useState("Congratulation");
   const [desc, setdesc] = useState("You Won!!");
   const [emojisize, setemojisize] = useState(400);
+  const [buttonwidth, setbuttonwidth] = useState(
+    Dimensions.get("window").width
+  );
 
+  // const updateLayoout = () => {
+  //   setbuttonwidth(Dimensions.get("window"));
+  // };
+  // Dimensions.addEventListener("change", updateLayoout);
+
+  useEffect(() => {
+    const updateLayoout = () => {
+      setbuttonwidth(Dimensions.get("window"));
+    };
+    Dimensions.addEventListener("change", updateLayoout);
+
+    return () => {
+      Dimensions.removeEventListener("change", updateLayoout);
+    };
+  }, []);
   const revert = (rever) => {
     return setStartMode(rever);
   };
@@ -59,7 +84,8 @@ const LetStart = (props) => {
   }
 
   return (
-    <View>
+    // <SafeAreaView> // rather than here put in app js to observe all chnage
+    <ScrollView>
       <View>{screen}</View>
       <View style={styles.constainerView}>
         <Button
@@ -100,7 +126,7 @@ const LetStart = (props) => {
       ></GameOn>
        */}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 export default LetStart;
